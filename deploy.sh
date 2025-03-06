@@ -13,11 +13,11 @@ ENVIRONMENT=$1
 if [ "$ENVIRONMENT" == "dev" ]; then
   IMAGE="sfu:dev"
   BASE_NAME="sfu-dev"
-  BASE_PORT=3000  # Starting port for dev
+  BASE_PORT=8144  # Starting port for dev
 elif [ "$ENVIRONMENT" == "prod" ]; then
   IMAGE="sfu:prod"
   BASE_NAME="sfu-prod"
-  BASE_PORT=30  # Starting port for prod
+  BASE_PORT=814  # Starting port for prod
 else
   echo "Unknown environment: $ENVIRONMENT"
   echo "Usage: $0 {dev|prod}"
