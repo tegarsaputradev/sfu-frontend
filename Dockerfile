@@ -11,7 +11,7 @@ FROM base AS builder
 WORKDIR /app
 COPY --from=deps /app/node_modules ./node_modules
 COPY . .
-RUN cp .env.example .env && sed -i 's|^NEXT_PUBLIC_SOCKET_URL=.*|NEXT_PUBLIC_SOCKET_URL=https://socket-sfu.ggwpdev.my.id|' .env && yarn build
+RUN cp .env.example .env && sed -i 's|^NEXT_PUBLIC_SOCKET_URL=.*|NEXT_PUBLIC_SOCKET_URL=https://socket-io-sfu.ggwpdev.my.id|' .env && yarn build
 
 FROM base AS dev
 WORKDIR /app
