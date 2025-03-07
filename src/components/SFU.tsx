@@ -395,7 +395,7 @@ export const SFU = () => {
           <video
             ref={remoteVideoRef}
             autoPlay
-            playsInline
+            // playsInline
             muted
             className="aspect-video border-4"
           />
