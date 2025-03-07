@@ -1,9 +1,12 @@
-import VideoCall from "@/components/VideoCall";
+import { SFU } from "@/components/SFU";
+import { SocketProvider } from "@/contexts/SocketProvider";
 
 export default function Home() {
   return (
     <>
-      <VideoCall />
+      <SocketProvider>
+        <SFU />
+      </SocketProvider>
     </>
   );
 }

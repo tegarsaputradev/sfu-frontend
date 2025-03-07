@@ -41,11 +41,13 @@ export default function VideoCall() {
 
     pc.onicecandidate = (event) => {
       if (event.candidate) {
+        console.log({ eventCandidate: "here" });
         socket.emit("ice-candidate", event.candidate);
       }
     };
 
     pc.ontrack = (event) => {
+      console.log({ onTrack: "here" });
       if (remoteVideoRef.current)
         remoteVideoRef.current.srcObject = event.streams[0];
     };
