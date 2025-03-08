@@ -72,6 +72,11 @@ export const SFU2 = () => {
       ...transportOptions,
       iceServers: [
         { urls: "stun:stun.l.google.com:19302" }, // Free Google STUN server
+        {
+          urls: "turn:openrelay.metered.ca:80",
+          username: "openrelayproject",
+          credential: "openrelayproject",
+        },
         // Optional: Add a TURN server for better reliability
         // {
         //   urls: "turn:your-turn-server.com:3478",
@@ -146,6 +151,11 @@ export const SFU2 = () => {
       ...transportOptions,
       iceServers: [
         { urls: "stun:stun.l.google.com:19302" }, // Free Google STUN server
+        {
+          urls: "turn:openrelay.metered.ca:80",
+          username: "openrelayproject",
+          credential: "openrelayproject",
+        },
         // Optional: Add a TURN server for better reliability
         // {
         //   urls: "turn:your-turn-server.com:3478",
