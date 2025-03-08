@@ -1,18 +1,13 @@
 import { useSocket } from "@/contexts/SocketProvider";
-import { useCallback, useEffect, useRef } from "react";
+import { useCallback, useEffect } from "react";
 
 import {
-  Device,
-  DtlsParameters,
-  RtpParameters,
   MediaKind,
-  Producer,
-  Transport,
   TransportOptions,
   RtpCapabilities,
 } from "mediasoup-client/lib/types";
 
-import * as mediasoupClient from "mediasoup-client";
+// import * as mediasoupClient from "mediasoup-client";
 
 export const useGetMeetingById = (id: string) => {
   const { socket, isConnected } = useSocket();
@@ -21,20 +16,20 @@ export const useGetMeetingById = (id: string) => {
    * Ref
    */
 
-  const deviceRef = useRef<Device | null>(null);
+  // const deviceRef = useRef<Device | null>(null);
 
   const getLocalStream = () => {
     console.log("local stream");
   };
 
-  const createDevice = async (
-    rtpCapabilities: RtpCapabilities
-  ): Promise<Device> => {
-    const newDevice = new mediasoupClient.Device();
-    await newDevice.load({ routerRtpCapabilities: rtpCapabilities });
-    deviceRef.current = newDevice;
-    return newDevice;
-  };
+  // const createDevice = async (
+  //   rtpCapabilities: RtpCapabilities
+  // ): Promise<Device> => {
+  //   const newDevice = new mediasoupClient.Device();
+  //   await newDevice.load({ routerRtpCapabilities: rtpCapabilities });
+  //   deviceRef.current = newDevice;
+  //   return newDevice;
+  // };
 
   const joinRoom = useCallback(
     (roomId: string) => {
@@ -60,15 +55,15 @@ export const useGetMeetingById = (id: string) => {
             alert("error");
           }
 
-          const {
-            sendTransportOptions,
-            recvTransportOptions,
-            rtpCapabilities,
-            peerIds,
-            existingProducers,
-          } = response;
+          // const {
+          //   sendTransportOptions,
+          //   recvTransportOptions,
+          //   rtpCapabilities,
+          //   peerIds,
+          //   existingProducers,
+          // } = response;
 
-          const newDevice = await createDevice(rtpCapabilities);
+          // const newDevice = await createDevice(rtpCapabilities);
         }
       );
     },
