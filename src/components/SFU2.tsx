@@ -68,7 +68,18 @@ export const SFU2 = () => {
   ): Transport | undefined => {
     if (!socket) return;
 
-    const newSendTransport = device.createSendTransport(transportOptions);
+    const newSendTransport = device.createSendTransport({
+      ...transportOptions,
+      iceServers: [
+        { urls: "stun:stun.l.google.com:19302" }, // Free Google STUN server
+        // Optional: Add a TURN server for better reliability
+        // {
+        //   urls: "turn:your-turn-server.com:3478",
+        //   username: "username",
+        //   credential: "password",
+        // },
+      ],
+    });
 
     newSendTransport.on(
       "connect",
@@ -131,7 +142,18 @@ export const SFU2 = () => {
   ): Transport | undefined => {
     if (!socket) return;
 
-    const newRecvTransport = device.createRecvTransport(transportOptions);
+    const newRecvTransport = device.createRecvTransport({
+      ...transportOptions,
+      iceServers: [
+        { urls: "stun:stun.l.google.com:19302" }, // Free Google STUN server
+        // Optional: Add a TURN server for better reliability
+        // {
+        //   urls: "turn:your-turn-server.com:3478",
+        //   username: "username",
+        //   credential: "password",
+        // },
+      ],
+    });
     newRecvTransport.on(
       "connect",
       (
