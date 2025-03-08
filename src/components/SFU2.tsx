@@ -73,9 +73,9 @@ export const SFU2 = () => {
       iceServers: [
         { urls: "stun:stun.l.google.com:19302" }, // Free Google STUN server
         {
-          urls: "turn:openrelay.metered.ca:80",
-          username: "openrelayproject",
-          credential: "openrelayproject",
+          urls: "turn:turn.bistri.com:80",
+          username: "homeo",
+          credential: "homeo",
         },
         // Optional: Add a TURN server for better reliability
         // {
