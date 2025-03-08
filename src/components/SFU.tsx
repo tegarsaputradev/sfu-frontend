@@ -14,6 +14,8 @@ import {
   Transport,
 } from "mediasoup-client/lib/types";
 
+import * as mediasoupClient from "mediasoup-client";
+
 let produceOptions: ProducerOptions = {
   encodings: [
     {
@@ -40,13 +42,14 @@ let produceOptions: ProducerOptions = {
 export const SFU = () => {
   const { socket, isConnected } = useSocket();
 
+  const deviceRef = useRef<Device | null>(null);
   const localVideoRef = useRef<HTMLVideoElement>(null);
   const remoteVideoRef = useRef<HTMLVideoElement>(null);
 
   const [rtpCapabilities, setRtpCapabilities] = useState<
     RtpCapabilities | undefined
   >();
-  const [device, setDevice] = useState<Device>();
+  // const [device, setDevice] = useState<Device>();
   const [sendTransport, setSendTransport] = useState<Transport>();
   const [recTransport, setRecTransport] = useState<Transport>();
   const [producerId, setProducerId] = useState<string>();
@@ -95,7 +98,7 @@ export const SFU = () => {
 
   const createDevice = async () => {
     try {
-      const device = new Device();
+      const device = new mediasoupClient.Device();
 
       // https://mediasoup.org/documentation/v3/mediasoup-client/api/#device-load
       // Loads the device with RTP capabilities of the Router (server side)
@@ -104,8 +107,13 @@ export const SFU = () => {
           // see getRtpCapabilities() below
           routerRtpCapabilities: rtpCapabilities,
         });
+        console.log({ deviceLoad: "success" });
 
-        setDevice(device);
+        // setDevice(device);
+        // if (deviceRef.current) {
+        deviceRef.current = device;
+        // console.log({ createDevice: "success" });
+        // }
       }
 
       console.log("RTP Capabilities", device.rtpCapabilities);
@@ -118,6 +126,7 @@ export const SFU = () => {
   };
 
   const createSendTransport = () => {
+    const device = deviceRef.current;
     if (!socket || !isConnected) return;
     // see server's socket.on('createWebRtcTransport', sender?, ...)
     // this is a call from Producer, so sender = true
@@ -241,6 +250,7 @@ export const SFU = () => {
   };
 
   const createRecvTransport = async () => {
+    const device = deviceRef.current;
     if (!socket || !isConnected || !device) return;
     // see server's socket.on('consume', sender?, ...)
     // this is a call from Consumer, so sender = false
@@ -303,6 +313,7 @@ export const SFU = () => {
   };
 
   const connectRecvTransport = async () => {
+    const device = deviceRef.current;
     if (!socket || !isConnected || !recTransport || !device) return;
     // for consumer, we need to tell the server first
     // to create a consumer based on the rtpCapabilities and consume
@@ -395,7 +406,7 @@ export const SFU = () => {
           <video
             ref={remoteVideoRef}
             autoPlay
-            // playsInline
+            playsInline
             muted
             className="aspect-video border-4"
           />

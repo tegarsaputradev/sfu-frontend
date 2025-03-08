@@ -1,12 +1,11 @@
 import { SFU } from "@/components/SFU";
-import { SocketProvider } from "@/contexts/SocketProvider";
+import { SFU2 } from "@/components/SFU2";
 
 export default function Home() {
   return (
     <>
-      <SocketProvider>
-        <SFU />
-      </SocketProvider>
+      {/* <SFU /> */}
+      <SFU2 />
     </>
   );
 }
